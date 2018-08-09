@@ -4,7 +4,7 @@
     <div id="card-advance" class="card card-default">
             
             <div class="card-body">
-                <a href="{{route('user.create')}}" class="text-right pull-right btn btn-complete btn-cons">Tambah Baru</a>
+                <a href="{{route('employee.create')}}" class="text-right pull-right btn btn-complete btn-cons">Tambah Baru</a>
                     <div class="table-responsive">
                             <table class="table table-striped" id="stripedTable">
                                 <thead>

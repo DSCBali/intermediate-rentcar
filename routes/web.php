@@ -11,8 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('pages.dashboard');
-});
+// Route::get('/', function () {
+//     return view('pages.dashboard');
+// });
+Auth::routes();
 
-Route::resource('user','UserController');
+Route::group(['middleware' => ['auth']], function () {
+    Route::get('/', 'HomeController@index')->name('home');
+    Route::resource('employee','UserController');
+    Route::resource('car-brand','CarBrandController');
+    Route::resource('car','CarController');
+});
