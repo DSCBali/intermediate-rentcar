@@ -18,7 +18,7 @@ Auth::routes();
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('/', 'HomeController@index')->name('home');
-    Route::resource('employee','UserController');
+    // Route::resource('employee','UserController');
     Route::resource('car-brand','CarBrandController');
     Route::resource('car','CarController');
 });

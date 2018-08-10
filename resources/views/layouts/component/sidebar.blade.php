@@ -34,15 +34,15 @@
         <ul class="menu-items">
             <li class="m-t-30 ">
                 <a href="{{route('home')}}" class="detailed">
-                    <span class="title">Dashboard</span>
-                    <span class="details">Additional Text</span>
+                    <span class="title">Home</span>
+                    <span class="details">General Information</span>
                 </a>
                 <span class="@if (url()->current() == route('home'))bg-success @endif icon-thumbnail"><i class="pg-home"></i></span>
             </li>
-            <li class="">
-                <a href="{{route('employee.index')}}"><span class="title">Employee</span></a>
-                <span class="@if (url()->current() == route('employee.index'))bg-success @endif icon-thumbnail"><i class="fa fa-user"></i></span>
-            </li>
+            <!-- <li class="">
+                <a href=""><span class="title">Employee</span></a>
+                <span class="icon-thumbnail"><i class="fa fa-user"></i></span>
+            </li> -->
             <li class="@if (url()->current() == route('car-brand.index') || url()->current() == route('car.index'))open active @endif">
                 <a href="javascript:;"><span class="title">Asset</span><span class="@if (url()->current() == route('car-brand.index') || url()->current() == route('car.index'))open @endif arrow"></span></a>
                 <span class="icon-thumbnail"><i class="fa fa-inbox"></i></span>

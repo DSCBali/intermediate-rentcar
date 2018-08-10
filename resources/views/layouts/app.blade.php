@@ -4,7 +4,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>Pages - Admin Dashboard UI Kit - Dashboard</title>
+    <title>@yield('page') - KuhaKu 8 Rent Car</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
     <script src="http://pages.revox.io/cdn-cgi/apps/head/QJpHOqznaMvNOv9CGoAdo_yvYKU.js"></script>
     <link rel="apple-touch-icon" href="{{asset('assets/pictures/favicon.png')}}">
@@ -29,86 +29,74 @@
     <link href="{{asset('pages/css/pages-icons.css')}}" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="{{asset('pages/css/themes/corporate.css')}}" rel="stylesheet" type="text/css" />
 </head>
-
 <body class="fixed-header dashboard menu-pin menu-behind">
-
-    @include('component.layouts.sidebar')
+    @include('layouts.component.sidebar')
     <div class="page-container ">
-
-            <div class="header ">
-    
-                <a href="#" class="btn-link toggle-sidebar d-lg-none pg pg-menu" data-toggle="sidebar">
-                </a>
-    
-                <div class="">
-                    <div class="brand inline   m-l-10">
-                        <img src="assets/img/logo.png" alt="logo" data-src="assets/img/logo.png" data-src-retina="assets/img/logo_2x.png" width="78" height="22" alt="Iki Logo">
-                        <!-- Sistem Rentcar -->
+        <div class="header ">
+            <a href="#" class="btn-link toggle-sidebar d-lg-none pg pg-menu" data-toggle="sidebar"></a>
+            <div class="">
+                <div class="brand inline   m-l-10">
+                    <img src="{{asset('assets/pictures/logo.png')}}" alt="logo" data-src="{{asset('assets/pictures/logo.png')}}" data-src-retina="{{asset('assets/pictures/logo.png')}}" width="120" height="40" alt="Iki Logo">
+                    <!-- Sistem Rentcar -->
+                </div>
+            </div>
+            <div class="d-flex align-items-center">
+                <div class="pull-left p-r-10 fs-14 font-heading d-lg-block d-none">
+                    <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <span class="semi-bold">{{Auth::user()->name}}</span>
+                    </button>
+                </div>
+                <div class="dropdown pull-right d-lg-block d-none">
+                    <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <span class="thumbnail-wrapper d32 circular inline">
+                        <img src="{{asset('assets/pictures/user.png')}}" alt="" data-src="{{asset('assets/pictures/user.png')}}" data-src-retina="{{asset('assets/pictures/user.png')}}" width="32" height="32">
+                    </span>
+                    <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
+                        <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
+                        <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
+                        <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
+                        <a href="" class="clearfix bg-master-lighter dropdown-item" onclick="event.preventDefault();document.getElementById('logoutform').submit();">
+                            <span class="pull-left">Logout</span>
+                                <form action="{{route('logout')}}" method="post" id="logoutform">
+                                    @csrf
+                                </form>
+                            <span class="pull-right"><i class="pg-power"></i></span>
+                        </a>
                     </div>
-    
-                    </div>
-                <div class="d-flex align-items-center">
-    
-                    <div class="pull-left p-r-10 fs-14 font-heading d-lg-block d-none">
-                        <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <span class="semi-bold">{{Auth::user()->name}}</span>
-                        </button>
-                    </div>
-                    <div class="dropdown pull-right d-lg-block d-none">
-                        <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="thumbnail-wrapper d32 circular inline">
-                            <img src="{{asset('assets/pictures/user.png')}}" alt="" data-src="{{asset('assets/pictures/user.png')}}" data-src-retina="{{asset('assets/pictures/user.png')}}" width="32" height="32">
-                        </span>
-
-                        <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
-                            <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
-                            <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
-                            <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
-                            <a href="#" class="clearfix bg-master-lighter dropdown-item" onclick="event.preventDefault();document.getElementById('logoutform').submit();">
-                                <span class="pull-left">Logout</span>
-                                    <form action="{{route('logout')}}" method="post" id="logoutform">
-                                        @csrf
-                                    </form>
-                                <span class="pull-right"><i class="pg-power"></i></span>
-                            </a>
+                </div>
+            </div>
+        </div>
+        <div class="page-content-wrapper ">
+            <div class="content ">
+                <div class="jumbotron" data-pages="parallax">
+                    <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+                        <div class="inner">
+                            <ol class="breadcrumb">
+                                @yield('header')
+                            </ol>
                         </div>
                     </div>
-    
+                </div>
+                <div class=" container-fluid   container-fixed-lg">
+                    @yield('content')
                 </div>
             </div>
-    
-            <div class="page-content-wrapper ">
-    
-                <div class="content sm-gutter">
-    
-                    <div class="container-fluid padding-25 sm-padding-10">
-                        
-                       @yield('content')
-                        
-                    </div>
-    
+            <div class=" container-fluid  container-fixed-lg footer">
+                <div class="copyright sm-text-center">
+                    <p class="small no-margin pull-left sm-pull-reset">
+                        <span class="hint-text">Copyright &copy; 2017 </span>
+                        <span class="font-montserrat">REVOX</span>.
+                        <span class="hint-text">All rights reserved. </span>
+                        <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> <span class="muted">|</span> <a href="#" class="m-l-10">Privacy Policy</a></span>
+                    </p>
+                    <p class="small no-margin pull-right sm-pull-reset">
+                        Hand-crafted <span class="hint-text">&amp; made with Love</span>
+                    </p>
+                    <div class="clearfix"></div>
                 </div>
-    
-                <div class=" container-fluid  container-fixed-lg footer">
-                    <div class="copyright sm-text-center">
-                        <p class="small no-margin pull-left sm-pull-reset">
-                            <span class="hint-text">Copyright &copy; 2017 </span>
-                            <span class="font-montserrat">REVOX</span>.
-                            <span class="hint-text">All rights reserved. </span>
-                            <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> <span class="muted">|</span> <a href="#" class="m-l-10">Privacy Policy</a></span>
-                        </p>
-                        <p class="small no-margin pull-right sm-pull-reset">
-                            Hand-crafted <span class="hint-text">&amp; made with Love</span>
-                        </p>
-                        <div class="clearfix"></div>
-                    </div>
-                </div>
-    
             </div>
-    
         </div>
-    
-
+    </div>
     <script src="{{asset('assets/plugins/pace/pace.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/jquery/jquery-3.2.1.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/modernizr.custom.js')}}" type="text/javascript"></script>
@@ -137,16 +125,10 @@
     <script src="{{asset('assets/plugins/rickshaw/rickshaw.min.js')}}"></script>
     <script src="{{asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/skycons/skycons.js')}}" type="text/javascript"></script>
-
     <script src="{{asset('pages/js/pages.js')}}"></script>
-
     <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>
-
     <script src="{{asset('assets/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>
-
     <script src="{{asset('assets/js/demo.js')}}" type="text/javascript"></script>
 </body>
-
-
 </html>
