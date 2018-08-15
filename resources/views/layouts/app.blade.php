@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <title>@yield('page') - KuhaKu 8 Rent Car</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, shrink-to-fit=no" />
-    <script src="http://pages.revox.io/cdn-cgi/apps/head/QJpHOqznaMvNOv9CGoAdo_yvYKU.js"></script>
+    <!-- <script src="http://pages.revox.io/cdn-cgi/apps/head/QJpHOqznaMvNOv9CGoAdo_yvYKU.js"></script> -->
     <link rel="apple-touch-icon" href="{{asset('assets/pictures/favicon.png')}}">
     <link rel="apple-touch-icon" sizes="76x76" href="{{asset('assets/pictures/favicon.png')}}">
     <link rel="apple-touch-icon" sizes="120x120" href="{{asset('assets/pictures/favicon.png')}}">
@@ -23,11 +23,17 @@
     <link href="{{asset('assets/plugins/jquery-scrollbar/jquery.scrollbar.css')}}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{asset('assets/plugins/select2/css/select2.min.css')}}" rel="stylesheet" type="text/css" media="screen" />
     <link href="{{asset('assets/plugins/switchery/css/switchery.min.css')}}" rel="stylesheet" type="text/css" media="screen" />
-    <link href="{{asset('assets/plugins/nvd3/nv.d3.min.css')}}" rel="stylesheet" type="text/css" media="screen" />
-    <link href="{{asset('assets/plugins/mapplic/css/mapplic.css')}}" rel="stylesheet" type="text/css" />
-    <link href="{{asset('assets/plugins/rickshaw/rickshaw.min.css')}}" rel="stylesheet" type="text/css" />
     <link href="{{asset('pages/css/pages-icons.css')}}" rel="stylesheet" type="text/css">
     <link class="main-stylesheet" href="{{asset('pages/css/themes/corporate.css')}}" rel="stylesheet" type="text/css" />
+    <script type="text/javascript">
+        function logout(){
+            if(confirm("Are you sure want to logout?")){
+                event.preventDefault();
+                document.getElementById('logoutform').submit();
+            }
+        }
+    </script>
+    @stack('header')
 </head>
 <body class="fixed-header dashboard menu-pin menu-behind">
     @include('layouts.component.sidebar')
@@ -37,7 +43,6 @@
             <div class="">
                 <div class="brand inline   m-l-10">
                     <img src="{{asset('assets/pictures/logo.png')}}" alt="logo" data-src="{{asset('assets/pictures/logo.png')}}" data-src-retina="{{asset('assets/pictures/logo.png')}}" width="120" height="40" alt="Iki Logo">
-                    <!-- Sistem Rentcar -->
                 </div>
             </div>
             <div class="d-flex align-items-center">
@@ -52,10 +57,8 @@
                         <img src="{{asset('assets/pictures/user.png')}}" alt="" data-src="{{asset('assets/pictures/user.png')}}" data-src-retina="{{asset('assets/pictures/user.png')}}" width="32" height="32">
                     </span>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
-                        <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
-                        <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
-                        <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
-                        <a href="" class="clearfix bg-master-lighter dropdown-item" onclick="event.preventDefault();document.getElementById('logoutform').submit();">
+                        <a href="{{route('profile.index')}}" class="dropdown-item"><i class="pg-settings_small"></i> Profile</a>
+                        <a style="cursor:pointer" class="clearfix bg-master-lighter dropdown-item" onclick="logout()">
                             <span class="pull-left">Logout</span>
                                 <form action="{{route('logout')}}" method="post" id="logoutform">
                                     @csrf
@@ -66,10 +69,10 @@
                 </div>
             </div>
         </div>
-        <div class="page-content-wrapper ">
-            <div class="content ">
+        <div class="page-content-wrapper">
+            <div class="content">
                 <div class="jumbotron" data-pages="parallax">
-                    <div class=" container-fluid   container-fixed-lg sm-p-l-0 sm-p-r-0">
+                    <div class="container-fluid sm-p-l-0 sm-p-r-0">
                         <div class="inner">
                             <ol class="breadcrumb">
                                 @yield('header')
@@ -77,21 +80,21 @@
                         </div>
                     </div>
                 </div>
-                <div class=" container-fluid   container-fixed-lg">
+                <div class="container-fluid">
                     @yield('content')
                 </div>
             </div>
-            <div class=" container-fluid  container-fixed-lg footer">
+            <div class="container-fluid footer">
                 <div class="copyright sm-text-center">
                     <p class="small no-margin pull-left sm-pull-reset">
-                        <span class="hint-text">Copyright &copy; 2017 </span>
-                        <span class="font-montserrat">REVOX</span>.
+                        <span class="hint-text">Copyright &copy; 2018 </span>
+                        <span class="font-montserrat"><a href="https://www.facebook.com/kuhaku.8" target="_blank">KuhaKu 8</a></span>.
                         <span class="hint-text">All rights reserved. </span>
-                        <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> <span class="muted">|</span> <a href="#" class="m-l-10">Privacy Policy</a></span>
+                        <!-- <span class="sm-block"><a href="#" class="m-l-10 m-r-10">Terms of use</a> <span class="muted">|</span> <a href="#" class="m-l-10">Privacy Policy</a></span> -->
                     </p>
-                    <p class="small no-margin pull-right sm-pull-reset">
+                    <!-- <p class="small no-margin pull-right sm-pull-reset">
                         Hand-crafted <span class="hint-text">&amp; made with Love</span>
-                    </p>
+                    </p> -->
                     <div class="clearfix"></div>
                 </div>
             </div>
@@ -108,27 +111,13 @@
     <script src="{{asset('assets/plugins/jquery-ios-list/jquery.ioslist.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/plugins/jquery-actual/jquery.actual.min.js')}}"></script>
     <script src="{{asset('assets/plugins/jquery-scrollbar/jquery.scrollbar.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}" type="text/javascript" ></script>
-    <script src="{{asset('assets/plugins/classie/classie.js')}}" type="text/javascript" ></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/select2/js/select2.full.min.js')}}"></script>
+    <script type="text/javascript" src="{{asset('assets/plugins/classie/classie.js')}}"></script>
     <script src="{{asset('assets/plugins/switchery/js/switchery.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/lib/d3.v3.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/nv.d3.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/src/utils.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/src/tooltip.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/src/interactiveLayer.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/src/models/axis.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/src/models/line.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/nvd3/src/models/lineWithFocusChart.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/mapplic/js/hammer.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/mapplic/js/jquery.mousewheel.js')}}"></script>
-    <script src="{{asset('assets/plugins/mapplic/js/mapplic.js')}}"></script>
-    <script src="{{asset('assets/plugins/rickshaw/rickshaw.min.js')}}"></script>
-    <script src="{{asset('assets/plugins/jquery-sparkline/jquery.sparkline.min.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/plugins/skycons/skycons.js')}}" type="text/javascript"></script>
     <script src="{{asset('pages/js/pages.js')}}"></script>
     <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/js/dashboard.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/demo.js')}}" type="text/javascript"></script>
+    @stack('footer')
 </body>
 </html>

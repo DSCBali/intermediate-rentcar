@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Car;
+use App\Client;
 
-class CarController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +15,11 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('brand')->orderBy('id','desc')->get();
+        $clients = Client::orderBy('id','desc')->get();
         
-        // dd($cars->toArray());
+        // dd($clients->toArray());
 
-        return view('pages.car.index',['cars' => $cars]);
+        return view('pages.client.index',['clients' => $clients]);
     }
 
     /**

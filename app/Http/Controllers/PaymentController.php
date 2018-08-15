@@ -4,9 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\Car;
-
-class CarController extends Controller
+class PaymentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,11 +13,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('brand')->orderBy('id','desc')->get();
-        
-        // dd($cars->toArray());
-
-        return view('pages.car.index',['cars' => $cars]);
+        //
     }
 
     /**
