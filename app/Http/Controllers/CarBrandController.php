@@ -70,7 +70,7 @@ class CarBrandController extends Controller
     {
         $oldcarbrand = CarBrand::where('id', $id)->first();
 
-        return view('pages.car-brand.edit')->with('oldcarbrand', $oldcarbrand);
+        return view('pages.car-brand.edit',['oldcarbrand' => $oldcarbrand]);
     }
 
     /**

@@ -20,10 +20,10 @@
                 <div class="card-body">
                     <form action="{{route('car-brand.store')}}" method="POST">
                     {{csrf_field()}}
-                        <div class="form-group">
+                        <div class="form-group form-group-default required">
                             <label>Name</label>
                             <span class="help"></span>
-                            <input type="text" name="name" class="form-control" placeholder="Put Name!" required="" value="{{old('name')}}" autocomplete="off">
+                            <input type="text" name="name" class="form-control" placeholder="Put Name!" value="{{old('name')}}" autocomplete="off" required>
                         </div>
                         <button class="btn btn-success btn-con">Save</button>
                         <a href="{{route('car-brand.index')}}" class="btn btn-default btn-con">Cancel</a>

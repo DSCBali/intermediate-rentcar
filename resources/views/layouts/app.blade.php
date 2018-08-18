@@ -116,7 +116,6 @@
     <script src="{{asset('assets/plugins/switchery/js/switchery.min.js')}}" type="text/javascript"></script>
     <script src="{{asset('pages/js/pages.js')}}"></script>
     <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>
-    <script src="{{asset('assets/js/scripts.js')}}" type="text/javascript"></script>
     <script src="{{asset('assets/js/demo.js')}}" type="text/javascript"></script>
     @stack('footer')
 </body>

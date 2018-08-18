@@ -15,7 +15,7 @@ class ClientController extends Controller
      */
     public function index()
     {
-        $clients = Client::orderBy('id','desc')->get();
+        $clients = Client::with('booking')->orderBy('id','desc')->get();
         
         // dd($clients->toArray());
 
@@ -29,7 +29,7 @@ class ClientController extends Controller
      */
     public function create()
     {
-        //
+        return view('pages.client.create');
     }
 
     /**
@@ -40,7 +40,18 @@ class ClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $req = $request->validate([
+            'nik' => 'required|min:5',
+            'name' => 'required|string|min:2|max:255',
+            'dob' => 'date',
+            'phone' => 'required|min:12|max:13',
+            'address' => 'required|string|min:10|max:255',
+            'gender' => 'string',
+        ]);
+        
+        $data = Client::create($req);
+
+        return redirect()->route('client.index');
     }
 
     /**
@@ -62,7 +73,9 @@ class ClientController extends Controller
      */
     public function edit($id)
     {
-        //
+        $oldclient = Client::where('id', $id)->first();
+
+        return view('pages.client.edit',['oldclient' => $oldclient]);
     }
 
     /**
@@ -74,7 +87,18 @@ class ClientController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $req = $request->validate([
+            'nik' => 'required|min:5',
+            'name' => 'required|string|min:2|max:255',
+            'dob' => 'date',
+            'phone' => 'required|min:12|max:13',
+            'address' => 'required|string|min:10|max:255',
+            'gender' => 'string',
+        ]);
+        
+        $data = Client::where('id', $id)->update($req);
+
+        return redirect()->route('client.index');
     }
 
     /**
@@ -85,6 +109,8 @@ class ClientController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Client::find($id)->delete();
+
+        return redirect()->route('client.index');
     }
 }

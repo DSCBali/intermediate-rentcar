@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Car;
+use App\CarBrand;
 
 class CarController extends Controller
 {
@@ -15,7 +16,7 @@ class CarController extends Controller
      */
     public function index()
     {
-        $cars = Car::with('brand')->orderBy('id','desc')->get();
+        $cars = Car::with('brand','booking')->orderBy('id','desc')->get();
         
         // dd($cars->toArray());
 
@@ -29,7 +30,9 @@ class CarController extends Controller
      */
     public function create()
     {
-        //
+        $brands = CarBrand::orderBy('id','desc')->get();
+
+        return view('pages.car.create',['brands' => $brands]);
     }
 
     /**
@@ -40,7 +43,18 @@ class CarController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $req = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'year' => 'min:4|max:4',
+            'type' => 'required|string',
+            'license_plat' => 'required|string|min:10|max:12',
+            'price' => 'required|min:5|max:255',
+            'brand_id' => 'required',
+        ]);
+        
+        $data = Car::create($req);
+
+        return redirect()->route('car.index');
     }
 
     /**
@@ -62,7 +76,10 @@ class CarController extends Controller
      */
     public function edit($id)
     {
-        //
+        $brands = CarBrand::orderBy('id','desc')->get();
+        $oldcar = Car::where('id', $id)->first();
+
+        return view('pages.car.edit',['brands' => $brands, 'oldcar' => $oldcar]);
     }
 
     /**
@@ -74,7 +91,18 @@ class CarController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $req = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+            'year' => 'max:4',
+            'type' => 'required|string',
+            'license_plat' => 'required|string|min:10|max:12',
+            'price' => 'required|min:5|max:255',
+            'brand_id' => 'required',
+        ]);
+        
+        $data = Car::where('id', $id)->update($req);
+
+        return redirect()->route('car.index');
     }
 
     /**
@@ -85,6 +113,8 @@ class CarController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Car::find($id)->delete();
+
+        return redirect()->route('car.index');
     }
 }

@@ -16,8 +16,8 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name',30);
-            $table->year('year');
-            $table->string('license_plat',12);
+            $table->year('year')->nullable();
+            $table->string('license_plat',12)->unique();
             $table->integer('price');
             $table->enum('type',['MANUAL','MATIC']);
             $table->unsignedInteger('brand_id');

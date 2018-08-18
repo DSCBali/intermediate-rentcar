@@ -64,13 +64,13 @@
                                 <p>
                                     <a href="{{route('car-brand.edit', $brand->id)}}" class="btn btn-warning">Edit</a>
                                     @if(count($brand->car)>0)
-                                    <button class="btn btn-danger" onclick="return alert('You cannot delete this Car Brand! Because it used in Car!');">Delete</button>
+                                        <button class="btn btn-danger" onclick="return alert('You cannot delete this Car Brand! Because it used in Car!');">Delete</button>
                                     @else
-                                    <button class="btn btn-danger" onclick="deleteconfirm({{$brand->id}},'{{$brand->name}}')">Delete</button>
-                                    <form action="{{route('car-brand.destroy', $brand->id)}}" method="POST" id="deleteform{{$brand->id}}">
-                                        {{csrf_field()}}
-                                        @method("DELETE")
-                                    </form>
+                                        <button class="btn btn-danger" onclick="deleteconfirm({{$brand->id}},'{{$brand->name}}')">Delete</button>
+                                        <form action="{{route('car-brand.destroy', $brand->id)}}" method="POST" id="deleteform{{$brand->id}}">
+                                            {{csrf_field()}}
+                                            @method("DELETE")
+                                        </form>
                                     @endif
                                 </p>
                             </td>
