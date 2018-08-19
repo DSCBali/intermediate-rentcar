@@ -20,7 +20,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="v-align-middle semi-bold">
-                                            <p>1</p>
+                                            <p>#</p>
                                         </td>
                                         <td class="v-align-middle semi-bold">
                                             <p>Mas Joko</p>
@@ -36,7 +36,7 @@
                                     </tr>
                                     <tr>
                                         <td class="v-align-middle semi-bold">
-                                            <p>2</p>
+                                            <p>#</p>
                                         </td>
                                         <td class="v-align-middle semi-bold">
                                             <p>Ko Marvel</p>
@@ -50,6 +50,18 @@
                                         <td class="v-align-middle"><a href="#" class="btn">Edit</a> <a href="#" class="btn">Hapus</a>
                                         </td>
                                     </tr>
+                                    @foreach($datas as $data)
+                                <tr>
+                                    <td class="v-align-middle">{{$data->id}}</td>
+                                    <td class="v-align-middle">{{$data->name}}</td>
+                                    <td class="v-align-middle">{{$data->email}}</td>
+                                    <td class="v-align-middle">{{$data->address}}</td>
+                                    <td class="v-align-middle">
+                                        <a class = "btn" href="{{route("user.edit",['id' => $data->id])}}" >Edit</a> 
+                                        <a class = "del-btn btn" data-id="{{$data->id}}">Delete</a>
+                                    </td>
+                                </tr>
+                                    @endforeach
                                     
                                 </tbody>
                             </table>

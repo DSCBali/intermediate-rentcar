@@ -8,31 +8,42 @@
     <div id="card-advance" class="card card-default">
             
             <div class="card-body">
-                    <form action="{{route('user.store')}}" method="POST">
+                    <form action="{{route('client.store')}}" method="POST">
                     @csrf
+                            <div class="form-group">
+                                <label>NIK</label>
+                                <span class="help">e.g. "Mas Joko"</span>
+                                <input type="text" name="nik" class="form-control" required="">
+                            </div>
                             <div class="form-group">
                                 <label>Nama</label>
                                 <span class="help">e.g. "Mas Joko"</span>
                                 <input type="text" name="name" class="form-control" required="">
                             </div>
                             <div class="form-group">
-                                <label>Email</label>
+                                <label>Tanggal Lahir</label>
                                 <span class="help">e.g. "Mas Joko"</span>
-                                <input type="email" name="email" class="form-control" required="">
+                                <input type="date" name="dob" class="form-control" required="">
                             </div>
                             <div class="form-group">
-                                <label>Password</label>
+                                <label>No Telp</label>
                                 <span class="help">e.g. "Mas Joko"</span>
-                                <input type="password" name="password" class="form-control" required="">
+                                <input type="text" name="phone" class="form-control" required="">
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <span class="help">e.g. "Mas Joko"</span>
                                 <input type="text" name="address" class="form-control" required="">
                             </div>
-
+                            <div class="form-group">
+                                <label>Jenis Kelamin</label>
+                                <span class="help">e.g. "Mas Joko"<br></span>
+                                    <input type="radio" name="gender" value="Laki-laki"> Laki-laki
+                                    <input type="radio" name="gender" value="Perempuan"> Perempuan
+                                    <input type="radio" name="gender" value="Lainnya"> Lainnya
+                            </div>
                             <button class="btn btn-success btn-con">Simpan</button>
-                            <a class="btn btn-default btn-con" href="{{route("user.index")}}">Batal</a>
+                            <a class="btn btn-default btn-con" href="{{route("client.index")}}">Batal</a>
                     </form>
             </div>
         </div>
