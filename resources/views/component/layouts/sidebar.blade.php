@@ -37,7 +37,7 @@
 
             <ul class="menu-items">
                 <li class="m-t-30 ">
-                    <a href="index.html" class="detailed">
+                    <a href="{{route('home')}}" class="detailed">
                         <span class="title">Dashboard</span>
                         <span class="details">Additional Text</span>
                     </a>
@@ -47,18 +47,30 @@
                     <a href="{{route('user.index')}}"><span class="title">User</span></a>
                     <span class="icon-thumbnail"><i class="pg-social"></i></span>
                 </li>
+                <li class="">
+                    <a href="{{route('client.index')}}"><span class="title">Client</span></a>
+                    <span class="icon-thumbnail"><i class="pg-social"></i></span>
+                </li>
+                <li class="">
+                    <a href="{{route('car.index')}}"><span class="title">Car</span></a>
+                    <span class="icon-thumbnail">C</span>
+                </li>
+                <li class="">
+                    <a href="{{route('brand.index')}}"><span class="title">Brand</span></a>
+                    <span class="icon-thumbnail">B</span>
+                </li>
                 <li>
-                    <a href="javascript:;"><span class="title">Dropdown</span>
+                    <a href="javascript:;"><span class="title">Transaction</span>
 <span class=" arrow"></span></a>
                     <span class="icon-thumbnail"><i class="pg-calender"></i></span>
                     <ul class="sub-menu">
                         <li class="">
-                            <a href="#">Sub Menu 1</a>
-                            <span class="icon-thumbnail">c</span>
+                            <a href="{{route('booking.index')}}">Booking</a>
+                            <span class="icon-thumbnail">Bo</span>
                         </li>
                         <li class="">
-                            <a href="#">Sub Menu 2</a>
-                            <span class="icon-thumbnail">M</span>
+                            <a href="{{route('payment.index')}}">Payment</a>
+                            <span class="icon-thumbnail">P</span>
                         </li>
                     </ul>
                 </li>

@@ -8,27 +8,23 @@
     <div id="card-advance" class="card card-default">
             
             <div class="card-body">
-                    <form action="{{route('user.store')}}" method="POST">
-                    @csrf
+                <form action="{{route('user.update',['id' => $user->id])}}" class="form-control" method="POST">
+                        @csrf
+                        @method('PUT')
                             <div class="form-group">
                                 <label>Nama</label>
                                 <span class="help">e.g. "Mas Joko"</span>
-                                <input type="text" name="name" class="form-control" required="">
+                                <input type="text" class="form-control" name="name" required=""value="{{$user->name}}">
                             </div>
                             <div class="form-group">
                                 <label>Email</label>
                                 <span class="help">e.g. "Mas Joko"</span>
-                                <input type="email" name="email" class="form-control" required="">
-                            </div>
-                            <div class="form-group">
-                                <label>Password</label>
-                                <span class="help">e.g. "Mas Joko"</span>
-                                <input type="password" name="password" class="form-control" required="">
+                                <input type="email" class="form-control" name="password" required="" value="{{$user->email}}">
                             </div>
                             <div class="form-group">
                                 <label>Alamat</label>
                                 <span class="help">e.g. "Mas Joko"</span>
-                                <input type="text" name="address" class="form-control" required="">
+                                <input type="text" class="form-control" name="address" required="" value="{{$user->address}}">
                             </div>
 
                             <button class="btn btn-success btn-con">Simpan</button>
