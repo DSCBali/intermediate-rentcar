@@ -76,7 +76,6 @@ class CarController extends Controller
     {
         //
         $data['car'] = Car::find($id);
-        $data['datas'] = CarBrand::get();
         return view('pages.car.edit',$data);
     }
 

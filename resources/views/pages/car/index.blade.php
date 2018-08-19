@@ -8,8 +8,7 @@
                     <div class="table-responsive">
                             <table class="table table-striped" id="stripedTable">
                                 <thead>
-                                    <tr>
-                        
+                                    <tr>                       
                                         <th style="width:10%">ID</th>
                                         <th style="">Nama</th>
                                         <th style="">Tahun</th>

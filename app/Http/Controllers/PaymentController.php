@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Payment;
 
 class PaymentController extends Controller
 {
@@ -14,6 +15,9 @@ class PaymentController extends Controller
     public function index()
     {
         //
+        $payment = new Payment;
+        $datas = $payment->all();
+        return view('pages.payment.index')->with('datas', $datas);
     }
 
     /**
@@ -23,7 +27,8 @@ class PaymentController extends Controller
      */
     public function create()
     {
-        //
+        $datas = Payment::get();
+        return view('pages.payment.create');
     }
 
     /**
@@ -34,7 +39,26 @@ class PaymentController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'type' => 'required',
+            'amount' => 'required',
+            'date' => 'required',
+            'client_id' => 'required',
+            'employee_id' => 'required',
+            'booking_id' => 'required'
+        ]);
+
+        $insert = [
+            'type'=> $request->type,
+            'amount'=> $request->amount,
+            'date'=> $request->date,
+            'client_id'=> $request->client_id,
+            'employee_id'=> $request->employee_id,
+            'booking_id'=> $request->booking_id
+        ];
+
+        $datas = Payment::create($insert);
+        return redirect()->route('payment.index');
     }
 
     /**
@@ -56,7 +80,9 @@ class PaymentController extends Controller
      */
     public function edit($id)
     {
-        //
+        $payment = new Payment;
+        $oldPayment = $payment->where('id', $id)->first();
+        return view('pages.payment.edit')->with('payment', $oldPayment);
     }
 
     /**
@@ -68,7 +94,26 @@ class PaymentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'type' => 'required',
+            'amount' => 'required',
+            'date' => 'required',
+            'client_id' => 'required',
+            'employee_id' => 'required',
+            'booking_id' => 'required'
+        ]);
+
+        $insert = [
+            'type'=> $request->type,
+            'amount'=> $request->amount,
+            'date'=> $request->date,
+            'client_id'=> $request->client_id,
+            'employee_id'=> $request->employee_id,
+            'booking_id'=> $request->booking_id
+        ];
+
+        $datas = Payment::where('id', $id)->update($insert);
+        return redirect()->route('payment.index');
     }
 
     /**

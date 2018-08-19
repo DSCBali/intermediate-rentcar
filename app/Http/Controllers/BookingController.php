@@ -3,6 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Booking;
+use App\Car;
+use App\Client;
+use App\User;
 
 class BookingController extends Controller
 {
@@ -13,7 +17,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $booking = new Booking;
+        $datas = $booking->all();
+        return view('pages.booking.index')->with('datas', $datas);
     }
 
     /**
@@ -23,7 +29,9 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        $data['datas'] = Car::get();
+        $data['datas'] = Client::get();
+        return view('pages.booking.create');
     }
 
     /**
@@ -34,7 +42,32 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $this->validate($request, [
+            'booking_code' => 'required',
+            'order_date' => 'required',
+            'rental_date' => 'required',
+            'return_date' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+            'fine' => 'required',
+            'car_id' => 'required',
+            'client_id' => 'required'
+        ]);
+
+        $insert = [
+            'booking_code'=> $request->booking_code,
+            'order_date'=> $request->order_date,
+            'rental_date'=> $request->rental_date,
+            'return_date'=> $request->return_date,
+            'price'=> $request->price,
+            'status'=> $request->status,
+            'fine'=> $request->fine,
+            'car_id'=> $request->car_id,
+            'client_id'=> $request->client_id
+        ];
+
+        $datas = Booking::create($insert);
+        return redirect()->route('booking.index');
     }
 
     /**
@@ -56,7 +89,9 @@ class BookingController extends Controller
      */
     public function edit($id)
     {
-        //
+        $booking = new Booking;
+        $oldBooking = $booking->where('id', $id)->first();
+        return view('pages.booking.edit')->with('booking', $oldBooking);
     }
 
     /**
@@ -68,7 +103,32 @@ class BookingController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'booking_code' => 'required',
+            'order_date' => 'required',
+            'rental_date' => 'required',
+            'return_date' => 'required',
+            'price' => 'required',
+            'status' => 'required',
+            'fine' => 'required',
+            'car_id' => 'required',
+            'client_id' => 'required'
+        ]);
+
+        $insert = [
+            'booking_code'=> $request->booking_code,
+            'order_date'=> $request->order_date,
+            'rental_date'=> $request->rental_date,
+            'return_date'=> $request->return_date,
+            'price'=> $request->price,
+            'status'=> $request->status,
+            'fine'=> $request->fine,
+            'car_id'=> $request->car_id,
+            'client_id'=> $request->client_id
+        ];
+
+        $datas = Booking::where('id', $id)->update($insert);
+        return redirect()->route('booking.index');
     }
 
     /**
