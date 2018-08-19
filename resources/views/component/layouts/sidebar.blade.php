@@ -47,9 +47,34 @@
                     <a href="{{route('user.index')}}"><span class="title">User</span></a>
                     <span class="icon-thumbnail"><i class="pg-social"></i></span>
                 </li>
+                <li class="">
+                        <a href="{{route('car.index')}}"><span class="title">Car</span></a>
+                        <span class="icon-thumbnail"><i class="pg-social"></i></span>
+                </li>
+                <li class="">
+                        <a href="{{route('car_brand.index')}}"><span class="title">Car Brand</span></a>
+                        <span class="icon-thumbnail"><i class="pg-social"></i></span>
+                </li>
+                <li class="">
+                    <a href="{{route('employee.index')}}"><span class="title">Employee</span></a>
+                    <span class="icon-thumbnail"><i class="pg-social"></i></span>
+                </li>
+                <li class="">
+                    <a href="{{route('payment.index')}}"><span class="title">Payment</span></a>
+                    <span class="icon-thumbnail"><i class="pg-social"></i></span>
+                </li>
+                <li class="">
+                        <a href="{{route('booking.index')}}"><span class="title">Booking</span></a>
+                        <span class="icon-thumbnail"><i class="pg-social"></i></span>
+                    </li>
+                <li>
+                <li class="">
+                    <a href="{{route('client.index')}}"><span class="title">Client</span></a>
+                    <span class="icon-thumbnail"><i class="pg-social"></i></span>
+                </li>
                 <li>
                     <a href="javascript:;"><span class="title">Dropdown</span>
-<span class=" arrow"></span></a>
+                    <span class=" arrow"></span></a>
                     <span class="icon-thumbnail"><i class="pg-calender"></i></span>
                     <ul class="sub-menu">
                         <li class="">
