@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('page')
-    Car
+    Booking
 @endsection
 
 @push('header')
@@ -11,7 +11,7 @@
     <link type="text/css" rel="stylesheet" href="{{asset('assets/plugins/jquery-datatable/media/css/jquery.dataTables.css')}}">
     <script type="text/javascript">
         function deleteconfirm(id,name){
-            if(confirm("Are you sure want to delete Car - "+name+"?")){
+            if(confirm("Are you sure want to delete Booking - "+name+"?")){
                 event.preventDefault();
                 document.getElementById('deleteform'+id).submit();
             }
@@ -20,8 +20,7 @@
 @endpush
 
 @section('header')
-    <li class="breadcrumb-item">Asset</li>
-    <li class="breadcrumb-item active">Car</li>
+    <li class="breadcrumb-item active">Booking</li>
 @endsection
 
 @section('content')
@@ -34,7 +33,7 @@
                 </div>
             </div>
             <div class="pull-right">
-                <a href="{{route('car.create')}}" class="text-right pull-right btn btn-complete"><i class="fa fa-plus"></i> Create New</a>
+                <a href="{{route('booking.create')}}" class="text-right pull-right btn btn-complete"><i class="fa fa-plus"></i> Create New</a>
             </div>
             <div class="clearfix"></div>
         </div>
@@ -43,47 +42,63 @@
                 <thead>
                     <tr>
                         <th style="width:5%">No</th>
-                        <th>Name</th>
-                        <th style="width:5%">Year</th>
-                        <th style="width:8%">License</th>
-                        <th style="width:15%">Price</th>
-                        <th style="width:5%">Type</th>
-                        <th>Brand</th>
+                        <th style="width:5%">Booking Code</th>
+                        <th style="width:8%">Order Date</th>
+                        <th style="width:8%">Rental Date</th>
+                        <th style="width:8%">Return Date</th>
+                        <th style="width:10%">Price</th>
+                        <th>Status</th>
+                        <th style="width:7%">Fine</th>
+                        <th>Car</th>
+                        <th>Client</th>
+                        <th>Cashier</th>
                         <th>Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    @foreach($cars as $car)
+                    @foreach($bookings as $booking)
                         <tr>
                             <td class="v-align-middle semi-bold">
                                 <p>{{$loop->iteration}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>{{$car->name}}</p>
+                                <p>{{$booking->booking_code}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>{{$car->year}}</p>
+                                <p>{{date('d-M-Y', strtotime($booking->order_date))}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>{{$car->license_plat}}</p>
+                                <p>{{date('d-M-Y', strtotime($booking->rental_date))}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>Rp {{number_format($car->price,0,',','.')}}</p>
+                                <p>{{date('d-M-Y', strtotime($booking->return_date))}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>{{$car->type}}</p>
+                                <p>Rp {{number_format($booking->price,0,',','.')}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>{{$car->brand->name}}</p>
+                                <p>{{$booking->status}}</p>
+                            </td>
+                            <td class="v-align-middle">
+                                <p>Rp {{number_format($booking->fine,0,',','.')}}</p>
+                            </td>
+                            <td class="v-align-middle">
+                                <p>{{$booking->car->name}}</p>
+                            </td>
+                            <td class="v-align-middle">
+                                <p>{{$booking->client->name}}</p>
+                            </td>
+                            <td class="v-align-middle">
+                                <p>{{$booking->user->name}}</p>
                             </td>
                             <td class="v-align-middle" align="center">
                                 <p>
-                                    <a href="{{route('car.edit', $car->id)}}" class="btn btn-warning">Edit</a>
-                                    @if(count($car->booking)>0)
-                                        <button class="btn btn-danger" onclick="return alert('You cannot delete this Car! Because it ever booked by the Client!');">Delete</button>
+                                    @if(count($booking->payment)==2)
+                                        <a href="{{route('booking.edit', $booking->id)}}" class="btn btn-warning">Show Payment</a>
                                     @else
-                                        <button class="btn btn-danger" onclick="deleteconfirm({{$car->id}},'{{$car->brand->name}} {{$car->name}}')">Delete</button>
-                                        <form action="{{route('car.destroy', $car->id)}}" method="POST" id="deleteform{{$car->id}}">
+                                        <a href="{{route('booking.edit', $booking->id)}}" class="btn btn-warning">Edit</a>
+                                        <button class="btn btn-danger" onclick="deleteconfirm({{$booking->id}},'{{$booking->client->name}}')">Delete</button>
+                                        <form action="{{route('booking.destroy', $booking->id)}}" method="POST" id="deleteform{{$booking->id}}">
                                             {{csrf_field()}}
                                             @method("DELETE")
                                         </form>

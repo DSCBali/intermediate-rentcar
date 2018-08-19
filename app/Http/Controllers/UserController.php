@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\User;
+
 class UserController extends Controller
 {
     /**
@@ -13,7 +15,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return view('pages.user.index');
     }
 
     /**
@@ -69,7 +71,14 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $req = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255',
+        ]);
+        
+        $data = User::where('id', $id)->update($req);
+
+        return redirect()->route('profile.index');
     }
 
     /**

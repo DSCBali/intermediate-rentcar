@@ -47,15 +47,14 @@
             </div>
             <div class="d-flex align-items-center">
                 <div class="pull-left p-r-10 fs-14 font-heading d-lg-block d-none">
-                    <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <span class="semi-bold">{{Auth::user()->name}}</span>
-                    </button>
+                    <span class="semi-bold">{{Auth::user()->name}}</span>
                 </div>
                 <div class="dropdown pull-right d-lg-block d-none">
                     <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <span class="thumbnail-wrapper d32 circular inline">
-                        <img src="{{asset('assets/pictures/user.png')}}" alt="" data-src="{{asset('assets/pictures/user.png')}}" data-src-retina="{{asset('assets/pictures/user.png')}}" width="32" height="32">
-                    </span>
+                        <span class="thumbnail-wrapper d32 circular inline">
+                            <img src="{{asset('assets/pictures/user.png')}}" alt="" data-src="{{asset('assets/pictures/user.png')}}" data-src-retina="{{asset('assets/pictures/user.png')}}" width="32" height="32">
+                        </span>
+                    </button>
                     <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
                         <a href="{{route('profile.index')}}" class="dropdown-item"><i class="pg-settings_small"></i> Profile</a>
                         <a style="cursor:pointer" class="clearfix bg-master-lighter dropdown-item" onclick="logout()">

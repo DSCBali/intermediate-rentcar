@@ -12,18 +12,19 @@
 @section('header')
     <li class="breadcrumb-item">Asset</li>
     <li class="breadcrumb-item">Client</li>
-    <li class="breadcrumb-item active">Edit</li>
+    <li class="breadcrumb-item active">Edit - {{$oldclient->name}}</li>
 @endsection
 
 @section('content')
     <div class="row">
         <div class="col-md-3"></div>
         <div class="col-md-6">
-        <h5>Edit Client</h5>
+        <h5>Edit Client - {{$oldclient->name}}</h5>
             <div id="card-advance" class="card card-default">
                 <div class="card-body">
-                    <form action="{{route('client.store')}}" method="POST" autocomplete="off">
+                    <form action="{{route('client.update', $oldclient->id)}}" method="POST" autocomplete="off">
                     {{csrf_field()}}
+                    @method('PUT')
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group form-group-default required">

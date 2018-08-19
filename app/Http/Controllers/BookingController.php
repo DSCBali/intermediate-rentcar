@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Booking;
+use Auth;
+
 class BookingController extends Controller
 {
     /**
@@ -13,7 +16,9 @@ class BookingController extends Controller
      */
     public function index()
     {
-        //
+        $bookings = Booking::with('payment','car','client','user')->orderBy('id','desc')->get();
+
+        return view('pages.booking.index',['bookings' => $bookings]);
     }
 
     /**
@@ -23,7 +28,10 @@ class BookingController extends Controller
      */
     public function create()
     {
-        //
+        $cars = Car::with('brand')->orderBy('id','desc')->get();
+        $client = Client::orderBy('id','desc')->get();
+
+        return view('pages.car.create',['cars' => $cars,'client' => $client]);
     }
 
     /**
