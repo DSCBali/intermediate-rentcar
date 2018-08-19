@@ -19,13 +19,6 @@
                                 <div class="card-title text-black hint-text">
                                     <span class="font-montserrat fs-11 all-caps">Car Owned <i class="fa fa-car"></i></span>
                                 </div>
-                                <div class="card-controls">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="refresh" class="card-refresh text-black" href="#"><i class="card-icon card-icon-refresh"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -60,13 +53,6 @@
                             <div class="card-header  top-left top-right">
                                 <div class="card-title text-black hint-text">
                                     <span class="font-montserrat fs-11 all-caps">car Owned <i class="fa fa-user"></i></span>
-                                </div>
-                                <div class="card-controls">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="refresh" class="card-refresh text-black" href="#"><i class="card-icon card-icon-refresh"></i></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>
@@ -103,13 +89,6 @@
                                 <div class="card-title text-black hint-text">
                                     <span class="font-montserrat fs-11 all-caps">Booking Complete <i class="fa fa-book"></i></span>
                                 </div>
-                                <div class="card-controls">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="refresh" class="card-refresh text-black" href="#"><i class="card-icon card-icon-refresh"></i></a>
-                                        </li>
-                                    </ul>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -144,13 +123,6 @@
                             <div class="card-header  top-left top-right">
                                 <div class="card-title text-black hint-text">
                                     <span class="font-montserrat fs-11 all-caps">Booking Uncomplete <i class="fa fa-book"></i></span>
-                                </div>
-                                <div class="card-controls">
-                                    <ul>
-                                        <li>
-                                            <a data-toggle="refresh" class="card-refresh text-black" href="#"><i class="card-icon card-icon-refresh"></i></a>
-                                        </li>
-                                    </ul>
                                 </div>
                             </div>
                         </div>

@@ -24,7 +24,7 @@
 @endsection
 
 @section('content')
-    <h4>Car</h4>
+    <h4>Booking</h4>
     <div class="card card-transparent">
         <div class="card-header ">
             <div class="pull-left">
@@ -77,13 +77,13 @@
                                 <p>Rp {{number_format($booking->price,0,',','.')}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>{{$booking->status}}</p>
+                                <p class="bold @if($booking->status=='PROCESS') text-warning @else text-success @endif">{{$booking->status}}</p>
                             </td>
                             <td class="v-align-middle">
                                 <p>Rp {{number_format($booking->fine,0,',','.')}}</p>
                             </td>
                             <td class="v-align-middle">
-                                <p>{{$booking->car->name}}</p>
+                                <p>{{$booking->car->brand->name}} {{$booking->car->name}}</p>
                             </td>
                             <td class="v-align-middle">
                                 <p>{{$booking->client->name}}</p>
@@ -93,9 +93,10 @@
                             </td>
                             <td class="v-align-middle" align="center">
                                 <p>
-                                    @if(count($booking->payment)==2)
-                                        <a href="{{route('booking.edit', $booking->id)}}" class="btn btn-warning">Show Payment</a>
+                                    @if(count($booking->payment)==2 || $booking->status=="PAID")
+                                        <a href="{{route('booking.show', $booking->id)}}" class="btn btn-info">Show Payment</a>
                                     @else
+                                        <a href="" class="btn btn-success">Pay</a>
                                         <a href="{{route('booking.edit', $booking->id)}}" class="btn btn-warning">Edit</a>
                                         <button class="btn btn-danger" onclick="deleteconfirm({{$booking->id}},'{{$booking->client->name}}')">Delete</button>
                                         <form action="{{route('booking.destroy', $booking->id)}}" method="POST" id="deleteform{{$booking->id}}">

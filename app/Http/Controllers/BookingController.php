@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Booking;
+use App\Car;
+use App\Client;
 use Auth;
 
 class BookingController extends Controller
@@ -16,7 +18,8 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $bookings = Booking::with('payment','car','client','user')->orderBy('id','desc')->get();
+        $bookings = Booking::with(['payment','client','user','car' => function($car) {$car->with('brand');}])->orderBy('id','desc')->get();
+        // dd($bookings->toArray());
 
         return view('pages.booking.index',['bookings' => $bookings]);
     }
@@ -28,10 +31,10 @@ class BookingController extends Controller
      */
     public function create()
     {
-        $cars = Car::with('brand')->orderBy('id','desc')->get();
-        $client = Client::orderBy('id','desc')->get();
+        $cars = Car::with('brand','booking')->orderBy('id','desc')->get();
+        $clients = Client::with('booking')->orderBy('id','desc')->get();
 
-        return view('pages.car.create',['cars' => $cars,'client' => $client]);
+        return view('pages.booking.create',['cars' => $cars,'clients' => $clients]);
     }
 
     /**
@@ -42,7 +45,35 @@ class BookingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $reqbooking = $request->validate([
+            'order_date' => 'required|string',
+            'rental_date' => 'required|string',
+            'return_date' => 'required|string',
+            'car_id' => 'required|string',
+            'client_id' => 'required|string',
+            'user_id' => 'required|string',
+        ]);
+        $data = str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
+        $code = substr($data,1,8);
+        $check = Booking::where('booking_code',$code)->get();
+        while(count($check)==1){
+            $code = substr($data,1,8);
+        }
+        $reqbooking['booking_code'] = $code;
+        $reqbooking['status'] = "PROCESS";
+        $reqbooking['fine'] = 0;
+        $datacar = Car::where('id',$request->car_id)->get();
+        $price = $datacar[0]->price;
+        $reqbooking['price'] = $price;
+
+        $reqpayment = $request->validate([
+            
+        ]);
+        
+        $data = Booking::create($reqbooking);
+        $data = Payment::create($reqpayment);
+
+        return redirect()->route('booking.index');
     }
 
     /**
@@ -53,7 +84,9 @@ class BookingController extends Controller
      */
     public function show($id)
     {
-        //
+        $booking = Booking::with(['payment' => function($payment) {$payment->with('user');},'client','user','car' => function($car) {$car->with('brand');}])->where('id', $id)->first();
+
+        return view('pages.booking.show',['booking' => $booking]);
     }
 
     /**
