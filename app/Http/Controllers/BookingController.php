@@ -46,13 +46,14 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         $reqbooking = $request->validate([
-            'order_date' => 'required|string',
-            'rental_date' => 'required|string',
-            'return_date' => 'required|string',
-            'car_id' => 'required|string',
-            'client_id' => 'required|string',
-            'user_id' => 'required|string',
+            'order_date' => 'required|date',
+            'rental_date' => 'required|date',
+            'return_date' => 'required|date',
+            'car_id' => 'required|numeric',
+            'client_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
         ]);
+        //booking code
         $data = str_shuffle('0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ');
         $code = substr($data,1,8);
         $check = Booking::where('booking_code',$code)->get();
@@ -60,17 +61,36 @@ class BookingController extends Controller
             $code = substr($data,1,8);
         }
         $reqbooking['booking_code'] = $code;
+        
+        //default
         $reqbooking['status'] = "PROCESS";
         $reqbooking['fine'] = 0;
+        
+        //car price
         $datacar = Car::where('id',$request->car_id)->get();
         $price = $datacar[0]->price;
         $reqbooking['price'] = $price;
 
         $reqpayment = $request->validate([
-            
+            'amount' => 'required|numeric|min:200000',
+            'date' => 'required|date',
+            'client_id' => 'required|numeric',
+            'user_id' => 'required|numeric',
         ]);
+
+        dd($reqpayment);
+
+        // $data = Booking::create($reqbooking);
+
+        //booking id
+        $booking_code = $reqbooking['booking_code'];
+        $databooking = Booking::where('booking_code',$booking_code)->get();
+        $booking_id = $databooking[0]->id;
+        $reqpayment['booking_id'] = $booking_id;
         
-        $data = Booking::create($reqbooking);
+        //default
+        $reqpayment['type'] = "DP";
+        
         $data = Payment::create($reqpayment);
 
         return redirect()->route('booking.index');

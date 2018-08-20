@@ -20,6 +20,15 @@
         <div class="col-md-3"></div>
         <div class="col-md-6">
             <h5>Create Booking</h5>
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
             <div id="card-advance" class="card card-default">
                 <div class="card-body">
                     <form action="{{route('booking.store')}}" method="POST" autocomplete="off">
@@ -50,7 +59,7 @@
                                     <select name="car_id" class="full-width" data-placeholder="Select Car!" data-init-plugin="select2" required>
                                         <option value=""></option>
                                         @foreach($cars as $car)
-                                            <option value="{{$car->id}}" @if(old('car_id')=="$car->id") selected @endif>{{$car->name}}</option>
+                                            <option value="{{$car->id}}" @if(old('car_id')=="$car->id") selected @endif>{{$car->name}} - Rp {{number_format($car->price,0,',','.')}}</option>
                                         @endforeach
                                     </select>
                                 </div>
@@ -59,6 +68,23 @@
                                     <span class="help"></span>
                                     <input type="text" name="return_date" class="form-control date" placeholder="Put Return Date!" value="{{old('return_date')}}" required>
                                     <input type="hidden" name="user_id" value="{{Auth::user()->id}}" required>
+                                </div>            
+                            </div>
+                        </div>
+                        <h5 align="center">Payment DP</h5>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-default required">
+                                    <label>Amount</label>
+                                    <span class="help"></span>
+                                    <input type="number" name="amount" class="form-control gone" placeholder="Put Amount!" value="{{old('amount')}}" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-group-default required">
+                                    <label>Date</label>
+                                    <span class="help"></span>
+                                    <input type="text" name="date" class="form-control date" placeholder="Put Date!" value="{{old('date')}}" required>
                                 </div>            
                             </div>
                         </div>

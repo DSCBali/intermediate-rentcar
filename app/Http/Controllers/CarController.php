@@ -45,11 +45,11 @@ class CarController extends Controller
     {
         $req = $request->validate([
             'name' => 'required|string|min:2|max:255',
-            'year' => 'min:4|max:4',
+            'year' => 'numeric|min:4|max:4',
             'type' => 'required|string',
             'license_plat' => 'required|string|min:10|max:12',
-            'price' => 'required|min:5|max:255',
-            'brand_id' => 'required',
+            'price' => 'required|numeric|min:5|max:255',
+            'brand_id' => 'required|numeric',
         ]);
         
         $data = Car::create($req);
