@@ -3,8 +3,7 @@
 namespace App;
 
 use Illuminate\Notifications\Notifiable;
-use App\Client;
-use Illuminate\Foundation\Auth\Client as Authenticatable;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Client extends Authenticatable
 {

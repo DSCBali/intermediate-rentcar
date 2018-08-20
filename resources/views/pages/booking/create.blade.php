@@ -3,13 +3,12 @@
     <h5>Add Booking</h5>
     <div class="row">
         <div class="col-md-6">
-
-        
+            
     <div id="card-advance" class="card card-default">
             <div class="card-body">
             <form action="{{route('booking.store')}}" method="POST">
                 @csrf
-                @include('layout.warning')
+                @include('component.layouts.warning')
                             <div class="form-group">
                                 <label>Booking Code</label>
                                 <span class="help">e.g. "Mas Joko"</span>

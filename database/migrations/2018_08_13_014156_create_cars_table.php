@@ -16,10 +16,12 @@ class CreateCarsTable extends Migration
         Schema::create('cars', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name', 50);
+            $table->integer('year');
             $table->string('license_plat', 20);
             $table->integer('price');
             $table->enum('type',['MANUAL','MATIC']);
             $table->integer('brand_id');
+            $table->timestamps();
         });
     }
 

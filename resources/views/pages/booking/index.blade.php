@@ -24,56 +24,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                        @foreach($datas as $data)
+                                        @foreach($cars as $car)
                                         <tr class="c-table__row">
-                                            <td class="c-table__cell">{{$data->id}}</td>
-                                            <td class="c-table__cell">{{$data->booking_code}}</td>
-                                            <td class="c-table__cell">{{$data->order_date}}</td>
-                                            <td class="c-table__cell">{{$data->rental_date}}</td>
-                                            <td class="c-table__cell">{{$data->return_date}}</td>
-                                            <td class="c-table__cell">{{$data->price}}</td>
-                                            <td class="c-table__cell">{{$data->status}}</td>
-                                            <td class="c-table__cell">{{$data->fine}}</td>
-                                            <td class="c-table__cell">{{$data->employees_id}}</td>
-                                            <td class="c-table__cell">{{$data->car_id}}</td>
-                                            <td class="c-table__cell">{{$data->client_id}}</td>
-                                        <td class="c-table__cell"><a href="{{route("payment.edit",['id' => $data->id])}}" class="c-btn c-btn--warning c-btn--small">Edit</a> <a class="c-btn c-btn--danger c-btn--small delete-btn" data-id="{{$data->id}}"  >Delete</a>
+                                            <td class="c-table__cell">{{$car->id}}</td>
+                                            <td class="c-table__cell">{{$car->booking_code}}</td>
+                                            <td class="c-table__cell">{{$car->order_date}}</td>
+                                            <td class="c-table__cell">{{$car->rental_date}}</td>
+                                            <td class="c-table__cell">{{$car->return_date}}</td>
+                                            <td class="c-table__cell">{{$car->price}}</td>
+                                            <td class="c-table__cell">{{$car->status}}</td>
+                                            <td class="c-table__cell">{{$car->fine}}</td>
+                                            <td class="c-table__cell">{{$car->employees_id}}</td>
+                                            <td class="c-table__cell">{{$car->car_id}}</td>
+                                            <td class="c-table__cell">{{$car->client_id}}</td>
+                                        <td class="c-table__cell"><a href="{{route("booking.edit",['id' => $booking->id])}}" class="c-btn c-btn--warning c-btn--small">Edit</a> <a class="c-btn c-btn--danger c-btn--small delete-btn" data-id="{{$car->id}}"  >Delete</a>
                                             </td>
                                         </tr>
                                     @endforeach
-                                    {{-- <tr>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>1</p>
-                                        </td>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>Mas Joko</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>gmail@joko.com</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>Nusa Penida</p>
-                                        </td>
-                                        <td class="v-align-middle"><a href="#" class="btn">Edit</a> <a href="#" class="btn">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>2</p>
-                                        </td>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>Ko Marvel</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>yahoo@marvel.com</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>Nusa Dua</p>
-                                        </td>
-                                        <td class="v-align-middle"><a href="#" class="btn">Edit</a> <a href="#" class="btn">Hapus</a>
-                                        </td>
-                                    </tr>
-                                     --}}
                                 </tbody>
                             </table>
                         </div>

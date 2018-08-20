@@ -10,7 +10,7 @@
             <form action="{{route('employee.update', ['id' => $employee->id])}}" method="POST">
                 @method('PUT')
                 @csrf
-                @include('layout.warning')
+                @include('component.layouts.warning')
                             <div class="form-group">
                                 <label>Name</label>
                                 <span class="help">e.g. "Mas Joko"</span>

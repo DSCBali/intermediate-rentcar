@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 class Booking extends Model
 {
     protected $fillable = [
-        'booking_code', 'order_date', 'rental_date', 'return_date', 'price', 'status', 'fine'
+        'booking_code', 'order_date', 'rental_date', 'return_date', 'price', 'status', 'fine', 'car_id'
     ];
 
     public function bookingEmployee(){
-        return $this->belongsTo('App\Employee', 'id');
+        return $this->belongsTo('App\Employee', 'car_id');
     }
 
     public function bookingCar(){

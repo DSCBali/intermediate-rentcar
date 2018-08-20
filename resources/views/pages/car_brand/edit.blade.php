@@ -9,7 +9,7 @@
             <div class="card-body">
             <form action="{{ route('car_brand.update', ['id' =>$carBrand->id]) }}" method="POST">
                 @csrf
-                @include('layout.warning')
+                @include('component.layouts.warning')
                             <div class="form-group">
                                 <label>Name</label>
                                 <span class="help">e.g. "Mas Joko"</span>

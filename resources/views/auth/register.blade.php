@@ -1,9 +1,10 @@
-@extends('component.layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
+<body class="bg">
+    <div class="container">
     <div class="row justify-content-center text-center">
-        <div class="col-md-8">
+        <div class="col-md-4 form">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
                 <p>Already have an account? <a href="{{ route('login') }}">Login</a></p>
@@ -73,5 +74,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>    
+</body>
+
 @endsection

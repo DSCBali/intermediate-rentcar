@@ -41,6 +41,7 @@ class CarController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
+            'year' => 'required',
             'license_plat' => 'required',
             'price' => 'required',
             'type' => 'required',
@@ -49,6 +50,7 @@ class CarController extends Controller
 
         $insert = [
             'name' => $request->name,
+            'year' => $request->year,
             'license_plat' => $request->license_plat,
             'price' => $request->price,
             'type' => $request->type,
@@ -94,6 +96,7 @@ class CarController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|string|max:255',
+            'year' => 'required',
             'license_plat' => 'required',
             'price' => 'required',
             'type' => 'required',
@@ -102,6 +105,7 @@ class CarController extends Controller
 
         $insert = [
             'name' => $request->name,
+            'year' => $request->year,
             'license_plat' => $request->license_plat,
             'price' => $request->price,
             'type' => $request->type,

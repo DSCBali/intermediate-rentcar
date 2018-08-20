@@ -1,9 +1,10 @@
-@extends('component.layouts.app')
+@extends('layouts.app2')
 
 @section('content')
-<div class="container">
+<body class="bg">
+    <div class="container">
     <div class="row justify-content-center text-center">
-        <div class="col-md-8">
+        <div class="col-md-4 form">
             <div class="card">
                 <div class="card-header">{{ __('Login') }}</div>
                 <p>Don't have an account? <a href="{{ route('register') }}">Register</a></p>
@@ -40,7 +41,7 @@
                         </div>
 
                         <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                            <div class="col-md-2 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
@@ -52,8 +53,8 @@
                         </div>
 
                         <div class="form-group row mb-0">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                            <div class="col-md-2 offset-md-4">
+                                <button type="submit" class="btn btn-primary" >
                                     {{ __('Login') }}
                                 </button>
 
@@ -67,5 +68,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>    
+</body>
+
 @endsection

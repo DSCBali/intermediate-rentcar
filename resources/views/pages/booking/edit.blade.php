@@ -9,7 +9,7 @@
             <div class="card-body">
             <form action="{{route('booking.update', ['id' => $booking->id])}}" method="POST">
                 @csrf
-                @include('layout.warning')
+                @include('component.layouts.warning')
                             <div class="form-group">
                                 <label>Booking Code</label>
                                 <span class="help">e.g. "Mas Joko"</span>

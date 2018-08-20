@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Booking;
+use App\Car;
 
 class BookingController extends Controller
 {
@@ -14,9 +15,10 @@ class BookingController extends Controller
      */
     public function index()
     {
-        $booking = new Booking;
-        $datas = $booking->all();
-        return view('pages.booking.index')->with('datas', $datas);
+        $bookings = Booking::all();
+        $cars = Car::all();
+        return view('pages.booking.index', compact('bookings', 'cars'));
+        
     }
 
     /**
@@ -26,8 +28,9 @@ class BookingController extends Controller
      */
     public function create()
     {
-        $datas = Booking::get();
-        return view('pages.booking.create');
+        $cars = Car::all();
+        return view('front.master', compact('cars'));
+        // return view('pages.booking.create', compact('cars'));
     }
 
     /**
@@ -62,7 +65,7 @@ class BookingController extends Controller
             'client_id'=> $request->client_id
         ];
 
-        $datas = Booking::create($insert);
+        $bookingCreate = Booking::create($insert);
         return redirect()->route('booking.index');
     }
 
@@ -135,6 +138,7 @@ class BookingController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $booking->delete();
+        return redirect()->route('pages.booking.index');
     }
 }

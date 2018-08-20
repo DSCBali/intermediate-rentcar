@@ -10,7 +10,7 @@
             <div class="card-body">
             <form action="{{route('payment.update', ['id'=>$payment->id] )}}" method="POST">
                 @csrf
-                @include('layout.warning')
+                @include('component.layouts.warning')
                             <div class="form-group">
                                 <label>Type</label>
                                 <span class="help">e.g. "Mas Joko"</span>
