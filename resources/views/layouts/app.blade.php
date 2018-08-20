@@ -53,13 +53,13 @@
                     </div>
                     <div class="dropdown pull-right d-lg-block d-none">
                         <button class="profile-dropdown-toggle" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    <span class="semi-bold">Nama </span> <span class="text-master">User</span>
+                                    <span class="semi-bold">{{ Auth::user()->name }} </span>
                         </button>
                         <div class="dropdown-menu dropdown-menu-right profile-dropdown" role="menu">
                             <a href="#" class="dropdown-item"><i class="pg-settings_small"></i> Settings</a>
                             <a href="#" class="dropdown-item"><i class="pg-outdent"></i> Feedback</a>
                             <a href="#" class="dropdown-item"><i class="pg-signals"></i> Help</a>
-                            <a href="#" class="clearfix bg-master-lighter dropdown-item">
+                            <a href="{{ route('login') }}" class="clearfix bg-master-lighter dropdown-item">
                                 <span class="pull-left">Logout</span>
                                 <span class="pull-right"><i class="pg-power"></i></span>
                             </a>
