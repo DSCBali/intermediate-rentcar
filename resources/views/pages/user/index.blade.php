@@ -1,59 +1,45 @@
 @extends('layouts.app')
+
+@section('page')
+    Profile {{Auth::user()->name}}
+@endsection
+
+@section('header')
+    <li class="breadcrumb-item">Home</li>
+    <li class="breadcrumb-item active">Profile - {{Auth::user()->name}}</li>
+@endsection
+
 @section('content')
-    <h5>Data User</h5>
-    <div id="card-advance" class="card card-default">
-            
-            <div class="card-body">
-                <a href="{{route('user.create')}}" class="text-right pull-right btn btn-complete btn-cons">Tambah Baru</a>
-                    <div class="table-responsive">
-                            <table class="table table-striped" id="stripedTable">
-                                <thead>
-                                    <tr>
-                        
-                                        <th style="width:10%">#</th>
-                                        <th style="">Nama</th>
-                                        <th style="">Email</th>
-                                        <th style="">Alamat</th>
-                                        <th style="">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>1</p>
-                                        </td>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>Mas Joko</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>gmail@joko.com</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>Nusa Penida</p>
-                                        </td>
-                                        <td class="v-align-middle"><a href="#" class="btn">Edit</a> <a href="#" class="btn">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>2</p>
-                                        </td>
-                                        <td class="v-align-middle semi-bold">
-                                            <p>Ko Marvel</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>yahoo@marvel.com</p>
-                                        </td>
-                                        <td class="v-align-middle">
-                                            <p>Nusa Dua</p>
-                                        </td>
-                                        <td class="v-align-middle"><a href="#" class="btn">Edit</a> <a href="#" class="btn">Hapus</a>
-                                        </td>
-                                    </tr>
-                                    
-                                </tbody>
-                            </table>
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6">
+        <h5>Profile - {{Auth::user()->name}}</h5>
+            <div id="card-advance" class="card card-default">
+                <div class="card-body">
+                    <form action="{{route('profile.update', Auth::user()->id)}}" method="POST" autocomplete="off">
+                    {{csrf_field()}}
+                    @method('PUT')
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group form-group-default">
+                                    <label>Name</label>
+                                    <span class="help"></span>
+                                    <input type="text" name="name" class="form-control" value="{{Auth::user()->name}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group form-group-default">
+                                    <label>E-Mail</label>
+                                    <span class="help"></span>
+                                    <input type="email" name="email" class="form-control" value="{{Auth::user()->email}}">
+                                </div>
+                            </div>
                         </div>
+                        <button class="btn btn-warning btn-con">Edit</button>
+                        <a href="{{route('home')}}" class="btn btn-default btn-con">Back to Home</a>
+                    </form>
+                </div>
             </div>
         </div>
+    </div>
 @endsection

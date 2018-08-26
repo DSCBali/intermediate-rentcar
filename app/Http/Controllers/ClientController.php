@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
+use App\Client;
 
-class UserController extends Controller
+class ClientController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('pages.user.index');
+        $clients = Client::with('booking')->orderBy('id','desc')->get();
+        
+        // dd($clients->toArray());
+
+        return view('pages.client.index',['clients' => $clients]);
     }
 
     /**
@@ -25,8 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-        
+        return view('pages.client.create');
     }
 
     /**
@@ -37,7 +40,18 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $req = $request->validate([
+            'nik' => 'required|numeric|min:5',
+            'name' => 'required|string|min:2|max:255',
+            'dob' => 'date',
+            'phone' => 'required|numeric|min:12|max:13',
+            'address' => 'required|string|min:10|max:255',
+            'gender' => 'string',
+        ]);
+        
+        $data = Client::create($req);
+
+        return redirect()->route('client.index');
     }
 
     /**
@@ -59,7 +73,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $oldclient = Client::where('id', $id)->first();
+
+        return view('pages.client.edit',['oldclient' => $oldclient]);
     }
 
     /**
@@ -72,13 +88,17 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $req = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'nik' => 'required|min:5',
+            'name' => 'required|string|min:2|max:255',
+            'dob' => 'date',
+            'phone' => 'required|min:12|max:13',
+            'address' => 'required|string|min:10|max:255',
+            'gender' => 'string',
         ]);
         
-        $data = User::where('id', $id)->update($req);
+        $data = Client::where('id', $id)->update($req);
 
-        return redirect()->route('profile.index');
+        return redirect()->route('client.index');
     }
 
     /**
@@ -89,6 +109,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = Client::find($id)->delete();
+
+        return redirect()->route('client.index');
     }
 }

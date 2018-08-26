@@ -4,9 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use App\User;
+use App\CarBrand;
 
-class UserController extends Controller
+class CarBrandController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return view('pages.user.index');
+        $brands = CarBrand::with('car')->orderBy('name','asc')->get();
+        
+        // dd($brands->toArray());
+
+        return view('pages.car-brand.index',['brands' => $brands]);
     }
 
     /**
@@ -25,8 +29,7 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
-        
+        return view('pages.car-brand.create');
     }
 
     /**
@@ -37,7 +40,13 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $req = $request->validate([
+            'name' => 'required|string|min:2|max:255',
+        ]);
+        
+        $data = CarBrand::create($req);
+
+        return redirect()->route('car-brand.index');
     }
 
     /**
@@ -59,7 +68,9 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+        $oldcarbrand = CarBrand::where('id', $id)->first();
+
+        return view('pages.car-brand.edit',['oldcarbrand' => $oldcarbrand]);
     }
 
     /**
@@ -72,13 +83,11 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $req = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|max:255',
+            'name' => 'required|string|min:2|max:255',
         ]);
-        
-        $data = User::where('id', $id)->update($req);
+        $data = CarBrand::where('id', $id)->update($req);
 
-        return redirect()->route('profile.index');
+        return redirect()->route('car-brand.index');
     }
 
     /**
@@ -89,6 +98,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $data = CarBrand::find($id)->delete();
+
+        return redirect()->route('car-brand.index');
     }
 }
